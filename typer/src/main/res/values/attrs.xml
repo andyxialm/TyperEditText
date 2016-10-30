@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="TyperEditText">
+        <attr name="touchable" format="boolean"/>
+        <attr name="characterWriteInterval" format="integer"/>
+        <attr name="punctuationWriteInterval" format="integer"/>
+    </declare-styleable>
+</resources>
