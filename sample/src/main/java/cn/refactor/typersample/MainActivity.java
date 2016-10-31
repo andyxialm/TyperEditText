@@ -1,9 +1,8 @@
 package cn.refactor.typersample;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import cn.refactor.typer.TyperEditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
-        TyperEditText typerEditText = (TyperEditText) findViewById(R.id.typer_edit_text);
-        typerEditText.start();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_container, SampleFragment.newInstance())
+                   .commit();
     }
 }

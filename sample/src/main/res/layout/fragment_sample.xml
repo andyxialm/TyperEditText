@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:typer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="186dp"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top|center_horizontal"
+        android:background="#353040"
+        android:src="@mipmap/ic_light_on"
+        android:contentDescription="@string/app_name"/>
+
+    <cn.refactor.typer.TyperEditText
+        android:id="@+id/typer_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:gravity="start"
+        android:lineSpacingMultiplier="1.2"
+        android:maxLines="3"
+        android:paddingBottom="24dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="48dp"
+        android:text="@string/sample_text"
+        android:textColor="@android:color/white"
+        typer:characterWriteInterval="200"
+        typer:punctuationWriteInterval="600"
+        typer:touchable="false"/>
+
+    <cn.refactor.typer.TyperEditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        typer:characterWriteInterval="200"
+        typer:punctuationWriteInterval="600"
+        typer:touchable="false"/>
+</FrameLayout>
+
+

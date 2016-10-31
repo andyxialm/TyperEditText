@@ -13,7 +13,7 @@ import android.widget.EditText;
 /**
  * Create by andy (https://github.com/andyxialm)
  * Create time: 16/10/30 20:10
- * Description : Typewriter writer EditText
+ * Description : Typewriter EditText
  */
 public class TyperEditText extends EditText implements ITyperControl {
 
@@ -27,7 +27,9 @@ public class TyperEditText extends EditText implements ITyperControl {
     private boolean mStop;
     private boolean mPause;
     private boolean mTouchable;
+
     private Editable mEditable;
+    private OnWriteTextChangedListener mTextChangedListener;
 
     public TyperEditText(Context context) {
         this(context, null);
@@ -61,6 +63,10 @@ public class TyperEditText extends EditText implements ITyperControl {
             mEditable = getText();
             super.setText(null, BufferType.NORMAL);
         }
+    }
+
+    public void setOnWriteTextChangedListener(OnWriteTextChangedListener l) {
+        mTextChangedListener = l;
     }
 
     @Override
@@ -99,6 +105,9 @@ public class TyperEditText extends EditText implements ITyperControl {
 
     private void recycleWrite(final int index) {
         if (mEditable == null || mEditable.length() == 0 || index == mEditable.length()) {
+            if (mTextChangedListener != null) {
+                mTextChangedListener.onCompleted();
+            }
             return;
         }
 
@@ -114,6 +123,9 @@ public class TyperEditText extends EditText implements ITyperControl {
         postDelayed(new Runnable() {
             @Override
             public void run() {
+                if (mTextChangedListener != null) {
+                    mTextChangedListener.onChanged(mIndex);
+                }
                 recycleWrite(++ mIndex);
             }
         }, interval);
