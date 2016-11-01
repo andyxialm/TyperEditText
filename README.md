@@ -1,5 +1,5 @@
 #TyperEditText
-
+[![license](https://img.shields.io/hexpm/l/plug.svg)]()
 
 Typerwriter
 
