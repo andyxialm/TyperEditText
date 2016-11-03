@@ -6,6 +6,12 @@ package cn.refactor.typer;
  * Description :
  */
 public interface ITyperControl {
+
+    /**
+     * restart
+     */
+    void restart();
+
     /**
      * start write
      */

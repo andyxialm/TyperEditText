@@ -24,12 +24,15 @@ public class TyperEditText extends EditText implements ITyperControl {
     private int mPunctuationWriteInterval;
     private int mIndex;
 
+    private boolean mWriting;
     private boolean mStop;
     private boolean mPause;
-    private boolean mTouchable;
 
+    private boolean mTouchable;
     private Editable mEditable;
     private OnWriteTextChangedListener mTextChangedListener;
+
+    private RecycleWriteRunnable mRecycleWriteRunnable;
 
     public TyperEditText(Context context) {
         this(context, null);
@@ -69,11 +72,30 @@ public class TyperEditText extends EditText implements ITyperControl {
         mTextChangedListener = l;
     }
 
+    public boolean isWriting() {
+        return mWriting;
+    }
+
+    public boolean isStop() {
+        return mStop;
+    }
+
+    public boolean isPause() {
+        return mPause;
+    }
+
+    @Override
+    public void restart() {
+        start();
+    }
+
     @Override
     public void start() {
         if (mEditable == null || mEditable.length() == 0) {
             return;
         }
+        clearStatus();
+        setWriteStatus(true);
         recycleWrite(mIndex);
     }
 
@@ -81,18 +103,22 @@ public class TyperEditText extends EditText implements ITyperControl {
     public void stop() {
         mStop = true;
         mIndex = 0;
+        removeCallbacks(mRecycleWriteRunnable);
     }
 
     @Override
     public void resume() {
-        mStop = false;
-        mPause = false;
-        recycleWrite(++ mIndex);
+        if (!isStop() && isPause()) {
+            mStop = false;
+            mPause = false;
+            recycleWrite(mIndex);
+        }
     }
 
     @Override
     public void pause() {
         mPause = true;
+        removeCallbacks(mRecycleWriteRunnable);
     }
 
     private void init(AttributeSet attrs) {
@@ -103,8 +129,20 @@ public class TyperEditText extends EditText implements ITyperControl {
         ta.recycle();
     }
 
+    private void clearStatus() {
+        mStop = false;
+        mPause = false;
+        mIndex = 0;
+        removeCallbacks(mRecycleWriteRunnable);
+    }
+
+    private void setWriteStatus(boolean writing) {
+        mWriting = writing;
+    }
+
     private void recycleWrite(final int index) {
         if (mEditable == null || mEditable.length() == 0 || index == mEditable.length()) {
+            setWriteStatus(false);
             if (mTextChangedListener != null) {
                 mTextChangedListener.onCompleted();
             }
@@ -115,20 +153,16 @@ public class TyperEditText extends EditText implements ITyperControl {
             return;
         }
 
+        if (mRecycleWriteRunnable == null) {
+            mRecycleWriteRunnable = new RecycleWriteRunnable();
+        }
+
         CharSequence subText = mEditable.subSequence(0, index + 1);
         setText(subText, BufferType.NORMAL);
         setSelection(subText.length());
 
         int interval = isChinesePunctuation(mEditable.charAt(mIndex)) ? mPunctuationWriteInterval : mCharacterWriteInterval;
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (mTextChangedListener != null) {
-                    mTextChangedListener.onChanged(mIndex);
-                }
-                recycleWrite(++ mIndex);
-            }
-        }, interval);
+        postDelayed(mRecycleWriteRunnable, interval);
     }
 
     private boolean isChinesePunctuation(char c) {
@@ -137,5 +171,16 @@ public class TyperEditText extends EditText implements ITyperControl {
                 || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
                 || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS
                 || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_FORMS;
+    }
+
+    private class RecycleWriteRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            if (mTextChangedListener != null) {
+                mTextChangedListener.onChanged(mIndex);
+            }
+            recycleWrite(++ mIndex);
+        }
     }
 }

@@ -14,8 +14,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
+        SampleFragment sampleFragment = SampleFragment.newInstance();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_container, SampleFragment.newInstance())
+        transaction.add(R.id.fragment_container, sampleFragment)
                    .commit();
+        new SamplePresenter(sampleFragment);
     }
 }
