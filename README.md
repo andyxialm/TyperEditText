@@ -1,10 +1,49 @@
 #TyperEditText
+[![](https://jitpack.io/v/andyxialm/TyperEditText.svg)](https://jitpack.io/#andyxialm/TyperEditText)
 [![license](https://img.shields.io/hexpm/l/plug.svg)]()
 
 Typerwriter
 
 ![](https://github.com/andyxialm/TyperEditText/blob/master/art/screenshot.gif?raw=true)
 ### Usage
+
+#### Gradle
+##### Step 1. Add the JitPack repository to your build file
+~~~ xml
+allprojects {
+    repositories {
+        ...
+        maven { url "https://jitpack.io" }
+    }
+}
+~~~
+
+##### Step 2. Add the dependency
+~~~ xml
+dependencies {
+    compile 'com.github.andyxialm:TyperEditText:1.0.0'
+}
+~~~
+
+#### Maven
+##### Step 1. Add the JitPack repository to your build file
+~~~ xml
+<repositories>
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+</repositories>
+~~~
+
+##### Step 2. Add the dependency
+~~~ xml
+<dependency>
+    <groupId>com.github.andyxialm</groupId>
+    <artifactId>TyperEditText</artifactId>
+    <version>1.0.0</version>
+</dependency>
+~~~
 	
 ##### Edit your layout XML:
 
