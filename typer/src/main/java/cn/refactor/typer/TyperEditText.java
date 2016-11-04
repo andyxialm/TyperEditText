@@ -1,3 +1,19 @@
+/**
+ * Copyright 2016 andy
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package cn.refactor.typer;
 
 import android.annotation.TargetApi;
@@ -129,10 +145,13 @@ public class TyperEditText extends EditText implements ITyperControl {
 
     private void init(AttributeSet attrs) {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.TyperEditText);
-        mCharacterWriteInterval = ta.getInteger(R.styleable.TyperEditText_characterWriteInterval, INTERVAL_CHARACTER_WRITE);
-        mPunctuationWriteInterval = ta.getInteger(R.styleable.TyperEditText_punctuationWriteInterval, INTERVAL_PUNCTUATION_WRITE);
-        mTouchable = ta.getBoolean(R.styleable.TyperEditText_touchable, false);
-        ta.recycle();
+        try {
+            mCharacterWriteInterval = ta.getInteger(R.styleable.TyperEditText_characterWriteInterval, INTERVAL_CHARACTER_WRITE);
+            mPunctuationWriteInterval = ta.getInteger(R.styleable.TyperEditText_punctuationWriteInterval, INTERVAL_PUNCTUATION_WRITE);
+            mTouchable = ta.getBoolean(R.styleable.TyperEditText_touchable, false);
+        } finally {
+            ta.recycle();
+        }
     }
 
     private void clearStatus() {
