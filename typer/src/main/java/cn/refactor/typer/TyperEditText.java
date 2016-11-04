@@ -121,6 +121,12 @@ public class TyperEditText extends EditText implements ITyperControl {
         removeCallbacks(mRecycleWriteRunnable);
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        clearStatus();
+        super.onDetachedFromWindow();
+    }
+
     private void init(AttributeSet attrs) {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.TyperEditText);
         mCharacterWriteInterval = ta.getInteger(R.styleable.TyperEditText_characterWriteInterval, INTERVAL_CHARACTER_WRITE);

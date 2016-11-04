@@ -21,7 +21,7 @@ allprojects {
 ##### Step 2. Add the dependency
 ~~~ xml
 dependencies {
-    compile 'com.github.andyxialm:TyperEditText:1.0.0'
+    compile 'com.github.andyxialm:TyperEditText:1.0.1'
 }
 ~~~
 
@@ -41,7 +41,7 @@ dependencies {
 <dependency>
     <groupId>com.github.andyxialm</groupId>
     <artifactId>TyperEditText</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ~~~
 	

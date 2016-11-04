@@ -32,19 +32,11 @@
             android:paddingLeft="24dp"
             android:paddingRight="24dp"
             android:paddingTop="48dp"
-            android:text="@string/sample_text"
             android:textColor="@android:color/white"
             typer:characterWriteInterval="200"
             typer:punctuationWriteInterval="600"
             typer:touchable="false"/>
 
-        <cn.refactor.typer.TyperEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            typer:characterWriteInterval="200"
-            typer:punctuationWriteInterval="600"
-            typer:touchable="false"/>
     </FrameLayout>
 
     <LinearLayout

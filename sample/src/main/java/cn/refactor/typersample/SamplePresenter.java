@@ -16,7 +16,7 @@ public class SamplePresenter implements SampleContract.SamplePresenter {
 
     @Override
     public void loadTextData() {
-        mView.setTextData("针对近日凤凰新闻对今日头条“流量劫持”的声明，今日头条以“诽谤”为由提起诉讼，认为凤凰新闻客户端侵犯了今日头条名誉，要求致歉并赔偿经济损失500万元。海淀法院日前受理了该案。");
+        mView.setTextData("华为Mate9搭载新一代华为麒麟960芯片，与上一代相比，八核CPU数据处理能力大幅提升，Mali G71八核GPU图形处理性能提升180%，支持最新的图形标准Vulkan。");
         mView.startTyper();
     }
 }

@@ -14,15 +14,7 @@ public interface SampleContract {
 
         void setTextData(String text);
 
-        void restartTyper();
-
         void startTyper();
-
-        void stopTyper();
-
-        void resumeTyper();
-
-        void pauseTyper();
 
         boolean isActive();
     }

@@ -54,7 +54,13 @@ public class SampleFragment extends Fragment implements SampleContract.View, Vie
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.loadTextData();
+        // imitate http-request
+        mTyperEditText.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mPresenter.loadTextData();
+            }
+        }, 1000);
     }
 
     @Override
@@ -63,28 +69,8 @@ public class SampleFragment extends Fragment implements SampleContract.View, Vie
     }
 
     @Override
-    public void restartTyper() {
-        mTyperEditText.restart();
-    }
-
-    @Override
     public void startTyper() {
         mTyperEditText.start();
-    }
-
-    @Override
-    public void stopTyper() {
-        mTyperEditText.stop();
-    }
-
-    @Override
-    public void resumeTyper() {
-        mTyperEditText.resume();
-    }
-
-    @Override
-    public void pauseTyper() {
-        mTyperEditText.pause();
     }
 
     @Override
@@ -116,5 +102,21 @@ public class SampleFragment extends Fragment implements SampleContract.View, Vie
                 resumeTyper();
                 break;
         }
+    }
+
+    private void restartTyper() {
+        mTyperEditText.restart();
+    }
+
+    private void stopTyper() {
+        mTyperEditText.stop();
+    }
+
+    private void resumeTyper() {
+        mTyperEditText.resume();
+    }
+
+    private void pauseTyper() {
+        mTyperEditText.pause();
     }
 }
