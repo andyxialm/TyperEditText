@@ -127,7 +127,7 @@ public class TyperEditText extends EditText implements ITyperControl {
         if (!isStop() && isPause()) {
             mStop = false;
             mPause = false;
-            recycleWrite(mIndex);
+            recycleWrite(++ mIndex);
         }
     }
 
@@ -158,6 +158,7 @@ public class TyperEditText extends EditText implements ITyperControl {
         mStop = false;
         mPause = false;
         mIndex = 0;
+        setText(null, BufferType.NORMAL);
         removeCallbacks(mRecycleWriteRunnable);
     }
 
@@ -165,7 +166,7 @@ public class TyperEditText extends EditText implements ITyperControl {
         mWriting = writing;
     }
 
-    private void recycleWrite(final int index) {
+    private void recycleWrite(int index) {
         if (mEditable == null || mEditable.length() == 0 || index == mEditable.length()) {
             setWriteStatus(false);
             if (mTextChangedListener != null) {
@@ -182,11 +183,11 @@ public class TyperEditText extends EditText implements ITyperControl {
             mRecycleWriteRunnable = new RecycleWriteRunnable();
         }
 
-        CharSequence subText = mEditable.subSequence(0, index + 1);
-        setText(subText, BufferType.NORMAL);
-        setSelection(subText.length());
+        char curCharacter = mEditable.charAt(index);
+        append(String.valueOf(curCharacter));
+        setSelection(index + 1);
 
-        int interval = isChinesePunctuation(mEditable.charAt(mIndex)) ? mPunctuationWriteInterval : mCharacterWriteInterval;
+        int interval = isChinesePunctuation(curCharacter) ? mPunctuationWriteInterval : mCharacterWriteInterval;
         postDelayed(mRecycleWriteRunnable, interval);
     }
 
