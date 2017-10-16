@@ -1,4 +1,4 @@
-#TyperEditText
+# TyperEditText
 [![](https://jitpack.io/v/andyxialm/TyperEditText.svg)](https://jitpack.io/#andyxialm/TyperEditText)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-TyperEditText-brightgreen.svg?style=flat)]()
 <a href="http://www.methodscount.com/?lib=com.github.andyxialm%3ATyperEditText%3A1.0.2"><img src="https://img.shields.io/badge/Methods and size-57 | 7 KB-e91e63.svg"/></a>
@@ -45,7 +45,7 @@ dependencies {
     <version>1.0.2</version>
 </dependency>
 ~~~
-	
+
 ##### Edit your layout XML:
 
 ~~~ xml
