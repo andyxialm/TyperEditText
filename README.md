@@ -1,3 +1,4 @@
+Amar's edit . 
 # TyperEditText
 [![](https://jitpack.io/v/andyxialm/TyperEditText.svg)](https://jitpack.io/#andyxialm/TyperEditText)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-TyperEditText-brightgreen.svg?style=flat)]()
